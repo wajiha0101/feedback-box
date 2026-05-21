@@ -606,7 +606,7 @@ function FeedbackForm({ onAdminClick }) {
       </div>
 
       <div className="pub-footer">
-        <a onClick={onAdminClick} style={{ cursor: 'pointer' }}>Admin Access</a>
+        <a onClick={onAdminClick} style={{ cursor: 'pointer' }}> Admin Access</a>
       </div>
     </div>
   )
@@ -618,6 +618,7 @@ function AdminLogin({ onBack }) {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPass, setShowPass] = useState(false)
 
   const handleLogin = async () => {
     setLoading(true); setError('')
@@ -636,12 +637,20 @@ function AdminLogin({ onBack }) {
         {error && <div className="login-err">{error}</div>}
 
         <label className="admin-label">Email</label>
-        <input className="admin-input" type="email" placeholder="admin@test.com" value={email} onChange={e => setEmail(e.target.value)} />
+        <input className="admin-input" type="email" placeholder="Enter your email" value={email} onChange={e => setEmail(e.target.value)} />
 
         <label className="admin-label">Password</label>
-        <input className="admin-input" type="password" placeholder="••••••••" value={password}
-          onChange={e => setPassword(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+        <div style={{ position:'relative', marginBottom:0 }}>
+          <input className="admin-input" type={showPass ? 'text' : 'password'} placeholder="Enter your password"
+            value={password} onChange={e => setPassword(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleLogin()}
+            style={{ marginBottom:16, paddingRight:48 }} />
+          <button onClick={() => setShowPass(p => !p)}
+            style={{ position:'absolute', right:14, top:'50%', transform:'translateY(-75%)',
+              background:'none', border:'none', cursor:'pointer', fontSize:'1.1rem', color:'#c47ea0' }}>
+            {showPass ? '🙈' : '👁️'}
+          </button>
+        </div>
 
         <button className="login-btn" onClick={handleLogin} disabled={loading}>
           {loading ? 'Signing in...' : 'Sign In'}

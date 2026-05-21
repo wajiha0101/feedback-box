@@ -606,7 +606,7 @@ function FeedbackForm({ onAdminClick }) {
       </div>
 
       <div className="pub-footer">
-        <a onClick={onAdminClick} style={{ cursor: 'pointer' }}>🔐 Admin Access</a>
+        <a onClick={onAdminClick} style={{ cursor: 'pointer' }}>Admin Access</a>
       </div>
     </div>
   )
